@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Abhay Portfolio</title>
+
+  <style>
+    /* ============================= */
+    /* BASIC SETTINGS */
+    /* ============================= */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: black;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    /* ============================= */
+    /* REAL FLUID SMOKE BACKGROUND */
+    /* ============================= */
+    .smoke-bg {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      overflow: hidden;
+    }
+
+    .smoke-bg svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .smoke-bg circle {
+      fill: rgba(255, 255, 255, 0.12);
+      filter: blur(90px);
+      animation: smokeMove 10s infinite alternate ease-in-out;
+    }
+
+    /* Floating Motion */
+    @keyframes smokeMove {
+      from {
+        transform: translate(-100px, -80px) scale(1);
+      }
+      to {
+        transform: translate(150px, 120px) scale(1.5);
+      }
+    }
+
+    /* ============================= */
+    /* NOISE OVERLAY (PREMIUM LOOK) */
+    /* ============================= */
+    .noise {
+      position: fixed;
+      inset: 0;
+      background: url("https://grainy-gradients.vercel.app/noise.svg");
+      opacity: 0.08;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    /* ============================= */
+    /* NAVBAR */
+    /* ============================= */
+    header {
+      width: 100%;
+      padding: 20px 80px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      position: fixed;
+      top: 0;
+      z-index: 100;
+
+      backdrop-filter: blur(20px);
+      background: rgba(0,0,0,0.55);
+    }
+
+    header h1 {
+      font-size: 18px;
+      font-weight: 500;
+      opacity: 0.85;
+    }
+
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: white;
+      font-size: 14px;
+      opacity: 0.6;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      opacity: 1;
+    }
+
+    /* ============================= */
+    /* HERO SECTION */
+    /* ============================= */
+    .hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    /* EDIT YOUR MAIN TITLE HERE */
+    .hero h2 {
+      font-size: 85px;
+      font-weight: 500;
+      line-height: 1.05;
+      letter-spacing: -2px;
+    }
+
+    /* EDIT YOUR SUBTEXT HERE */
+    .hero p {
+      margin-top: 20px;
+      font-size: 16px;
+      opacity: 0.6;
+      max-width: 650px;
+      line-height: 1.6;
+    }
+
+    /* BUTTON */
+    .hero button {
+      margin-top: 30px;
+      padding: 14px 30px;
+      border-radius: 50px;
+      border: 1px solid rgba(255,255,255,0.25);
+      background: transparent;
+      color: white;
+      cursor: pointer;
+      font-size: 14px;
+      transition: 0.4s;
+    }
+
+    .hero button:hover {
+      background: white;
+      color: black;
+      box-shadow: 0 0 30px rgba(255,255,255,0.35);
+    }
+
+    /* ============================= */
+    /* SECTIONS */
+    /* ============================= */
+    section {
+      padding: 90px 90px;
+      max-width: 1200px;
+      margin: auto;
+
+      /* Scroll animation default */
+      opacity: 0;
+      transform: translateY(60px);
+      transition: 1s ease;
+    }
+
+    section.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    section h3 {
+      font-size: 45px;
+      font-weight: 500;
+      margin-bottom: 15px;
+    }
+
+    section p {
+      opacity: 0.6;
+      line-height: 1.8;
+      font-size: 15px;
+      max-width: 750px;
+    }
+
+    /* ============================= */
+    /* GRID CARD DESIGN */
+    /* ============================= */
+    .grid {
+      margin-top: 45px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+    }
+
+    .card {
+      padding: 25px;
+      border-radius: 20px;
+
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      backdrop-filter: blur(25px);
+
+      transition: 0.4s;
+    }
+
+    /* Hover animation */
+    .card:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 0 40px rgba(255,255,255,0.15);
+    }
+
+    /* Certificate Image */
+    .card img {
+      width: 100%;
+      border-radius: 15px;
+      margin-bottom: 15px;
+    }
+
+    /* ============================= */
+    /* CONTACT SECTION STYLE */
+    /* ============================= */
+    .contact-box {
+      margin-top: 30px;
+      padding: 25px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      backdrop-filter: blur(25px);
+    }
+
+    .contact-box a {
+      color: white;
+      text-decoration: none;
+      opacity: 0.8;
+    }
+
+    .contact-box a:hover {
+      opacity: 1;
+    }
+
+    /* ============================= */
+    /* FOOTER */
+    /* ============================= */
+    footer {
+      text-align: center;
+      opacity: 0.4;
+      font-size: 13px;
+      padding: 50px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ============================= -->
+  <!-- FLUID SMOKE BACKGROUND -->
+  <!-- ============================= -->
+  <div class="smoke-bg">
+    <svg viewBox="0 0 800 800">
+      <filter id="noise">
+        <feTurbulence type="fractalNoise" baseFrequency="0.015" numOctaves="3">
+          <animate attributeName="baseFrequency"
+            dur="6s"
+            values="0.01;0.03;0.01"
+            repeatCount="indefinite" />
+        </feTurbulence>
+        <feDisplacementMap in="SourceGraphic" scale="180" />
+      </filter>
+
+      <!-- LEFT FLUID SMOKE -->
+      <circle cx="250" cy="400" r="260" filter="url(#noise)" />
+
+      <!-- RIGHT FLUID SMOKE -->
+      <circle cx="600" cy="420" r="220" filter="url(#noise)" />
+    </svg>
+  </div>
+
+  <!-- Grain Overlay -->
+  <div class="noise"></div>
+
+  <!-- ============================= -->
+  <!-- NAVBAR -->
+  <!-- ============================= -->
+  <header>
+    <h1>Abhay Puria</h1>
+
+    <nav>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#certs">Certificates</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <!-- ============================= -->
+  <!-- HERO SECTION -->
+  <!-- ============================= -->
+  <div class="hero">
+    <h2>Cybersecurity | Red Team Enthusiast</h2>
+
+    <p>
+      I’m Abhay — a cybersecurity student learning ethical hacking,
+      penetration testing, and building modern security solutions.
+    </p>
+
+    <button onclick="location.href='#contact'">
+      Get in Touch
+    </button>
+  </div>
+
+  <!-- ============================= -->
+  <!-- ABOUT SECTION -->
+  <!-- ============================= -->
+  <section id="about">
+    <h3>About Me</h3>
+
+    <p>
+      Hi, I’m Abhay puria — a cybersecurity student currently pursuing my BCA (2nd year) with a specialization in Cybersecurity at JECRC University.
+      My focus is on red teaming, bug hunting, and application security. 
+      I enjoy exploring both offensive and defensive sides of cybersecurity — learning exploitation, evasion, and secure software practices.
+    </p>
+  </section>
+
+  <!-- ============================= -->
+  <!-- SKILLS SECTION -->
+  <!-- ============================= -->
+  <section id="skills">
+    <h3>Skills</h3>
+    <p>My cybersecurity and technical expertise.</p>
+
+    <div class="grid">
+
+      <div class="card">
+        <h4>Ethical Hacking</h4>
+        <p>OWASP, exploitation, pentesting workflow.</p>
+      </div>
+
+      <div class="card">
+        <h4>Networking</h4>
+        <p>Firewalls, IDS/IPS, TCP/IP fundamentals.</p>
+      </div>
+
+      <div class="card">
+        <h4>Python Automation</h4>
+        <p>Security scripting and automation tools.</p>
+      </div>
+
+      <div class="card">
+        <h4>Bug Bounty</h4>
+        <p>Finding vulnerabilities & responsible disclosure.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================= -->
+  <!-- CERTIFICATES SECTION -->
+  <!-- ============================= -->
+  <section id="certs">
+    <h3>Certificates</h3>
+    <p>My achievements and certifications.</p>
+
+    <div class="grid">
+
+      <!-- ✅ HOW TO ADD PNG CERTIFICATE -->
+      <!-- Create folder: assets -->
+      <!-- Put image: certificate1.png -->
+      <div class="card">
+        <img src="assets/certificate1.png" alt="Certificate 1">
+        <h4>EC-Council Certified Security Specialist (CND)</h4>
+        <p>Issued by: EC-Council
+           Recognized certification demonstrating knowledge of network security, defensive mechanisms, and threat detection, 
+           with a focus on securing enterprise networks through monitoring, incident response, and effective defense strategies</p>
+      </div>
+
+      <div class="card">
+        <img src="assets/certificate2.png" alt="Certificate 2">
+        <h4>EC-Council Certified Security Specialist (ECSS)</h4>
+        <p>Issued by: EC-Council
+            Demonstrates understanding of ethical hacking, 
+            network defense, and cybersecurity fundamentals.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================= -->
+  <!-- CONTACT SECTION -->
+  <!-- ============================= -->
+  <section id="contact">
+    <h3>Contact Me</h3>
+    <p>You can reach me here:</p>
+
+    <div class="contact-box">
+
+      <!-- EDIT YOUR EMAIL HERE -->
+      📧 Email:
+      <a href="mailto:yourgmail@gmail.com">
+        abhaypuria75@gmail.com
+      </a>
+
+      <br><br>
+
+      <!-- EDIT YOUR LINKEDIN HERE -->
+      🔗 LinkedIn:
+      <a href="https://linkedin.com" target="_blank">
+        linkedin.com/in/yourprofile
+      </a>
+
+      <br><br>
+
+     
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    © 2026 Abhay Puria
+  </footer>
+
+  <!-- ============================= -->
+  <!-- SCROLL REVEAL ANIMATION SCRIPT -->
+  <!-- ============================= -->
+  <script>
+    const sections = document.querySelectorAll("section");
+
+    window.addEventListener("scroll", () => {
+      sections.forEach(sec => {
+        const top = sec.getBoundingClientRect().top;
+
+        if (top < window.innerHeight - 120) {
+          sec.classList.add("show");
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
